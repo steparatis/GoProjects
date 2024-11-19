@@ -1,52 +1,51 @@
-# Login service
+# Служба входа
 
-### Features Created:
+### Созданные функции:
 
-1. **Login Page:**
-   - **Function:** `login(w http.ResponseWriter, r *http.Request)`
-   - **Description:** This function serves the `login.html` file to the user when they navigate to `/login`. It parses the HTML file and executes the template, sending the resulting HTML to the user's browser.
-   - **How to Call:** Access `https://localhost:8080/login` in your web browser.
+1. **Страница входа:**
+- **Функция:** `login(w http.ResponseWriter, r *http.Request)`
+- **Описание:** Эта функция предоставляет файл `login.html` пользователю, когда он переходит на `/login`. Она анализирует файл HTML и выполняет шаблон, отправляя полученный HTML в браузер пользователя.
+- **Как вызвать:** Откройте `https://localhost:8080/login` в вашем веб-браузере.
 
-2. **Login Submission:**
-   - **Function:** `loginSubmit(w http.ResponseWriter, r *http.Request)`
-   - **Description:** This function handles form submissions from the login page. It reads the `email` and `password` form values, checks them against a hardcoded user map (`users`), and returns a success or failure message based on whether the credentials match.
-   - **How to Call:** Submit a form with `email` and `password` fields to `https://localhost:80/login-submit`.
+2. **Отправка входа:**
+- **Функция:** `loginSubmit(w http.ResponseWriter, r *http.Request)`
+- **Описание:** Эта функция обрабатывает отправку форм со страницы входа. Он считывает значения формы `email` и `password`, проверяет их по жестко закодированной карте пользователей (`users`) и возвращает сообщение об успешном или неудачном выполнении в зависимости от того, совпадают ли учетные данные.
+- **Как вызвать:** Отправьте форму с полями `email` и `password` на `https://localhost:80/login-submit`.
 
-### Detailed Explanation of How to Call These Features:
+### Подробное объяснение того, как вызывать эти функции:
 
-1. **Serving the Login Page:**
+1. **Обслуживание страницы входа:**
 
-    - When a user navigates to `https://localhost:80/login`, the `handler` function routes the request to the `login` function.
-    - The `login` function then looks for a file named `login.html` in the same directory and parses it.
-    - If the file is found and successfully parsed, it sends the HTML content to the user's browser.
+- Когда пользователь переходит на `https://localhost:80/login`, функция `handler` направляет запрос функции `login`.
+- Затем функция `login` ищет файл с именем `login.html` в том же каталоге и анализирует его.
+- Если файл найден и успешно проанализирован, он отправляет содержимое HTML в браузер пользователя.
 
-    **Example URL to access the login page:**
-    ```plaintext
-    https://localhost:80/login
-    ```
+**Пример URL для доступа к странице входа:**
+```plaintext
+https://localhost:80/login
+```
 
-2. **Handling Login Submission:**
+2. **Обработка отправки входа:**
 
-    - When a user submits the login form (presumably located in `login.html`), the form should be configured to POST the data to `/login-submit`.
-    - The `handler` function routes the request to `loginSubmit`.
-    - The `loginSubmit` function retrieves the `email` and `password` form values, checks them against the `users` map, and returns an appropriate response.
+- Когда пользователь отправляет форму входа (предположительно, расположенную в `login.html`), форма должна быть настроена на отправку данных методом POST в `/login-submit`.
+- Функция `handler` направляет запрос в `loginSubmit`.
+- Функция `loginSubmit` извлекает значения формы `email` и `password`, проверяет их по карте `users` и возвращает соответствующий ответ.
 
-    **Example URL to submit login data:**
-    ```plaintext
-    https://localhost:80/login-submit
-    ```
+**Пример URL для отправки данных входа:**
+```plaintext
+https://localhost:80/login-submit
+```
 
+### Запуск сервера:
 
-### Running the Server:
+1. **Убедитесь, что у вас есть файлы `cert.pem` и `key.pem`, сгенерированные и размещенные в том же каталоге, что и ваш код Go.**
+2. **Запустите сервер:**
 
-1. **Ensure you have `cert.pem` and `key.pem` files generated and placed in the same directory as your Go code.**
-2. **Run your server:**
+```sh
+go run main.go
+```
 
-    ```sh
-    go run main.go
-    ```
+3. **Доступ к функциям в вашем веб-браузере:**
 
-3. **Access the features in your web browser:**
-
-    - **Login Page:** `https://localhost:80/login`
-    - **Submit Login:** Form in the login page submits to `https://localhost:80/login-submit`
+- **Страница входа:** `https://localhost:80/login`
+- **Отправить вход:** Форма на странице входа отправляется на `https://localhost:80/login-submit`
